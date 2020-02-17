@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ /*
+  ~ * Copyright (c) 2019 Haulmont Technology Ltd. All Rights Reserved.
+  ~ * Haulmont Technology proprietary and confidential.
+  ~ * Use is subject to license terms.
+  ~ */
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="individualsTable"
+        messagesPack="com.company.tesis.web.screens.individual">
+    <data readOnly="true">
+        <collection id="individualsDc"
+                    class="com.company.tesis.entity.Individual"
+                    view="_local">
+            <loader id="individualsDl">
+                <query>
+                    <![CDATA[select e from tesis_Individual e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="individualsTable"
+            spacing="true">
+        <label value="Individual customers"/>
+        <filter id="filter"
+                applyTo="individualsTable"
+                dataLoader="individualsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="individualsTable"
+                    width="100%"
+                    dataContainer="individualsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="phone"/>
+                <column id="email"/>
+                <column id="passportNo"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="individualsTable.create"/>
+                <button id="editBtn" action="individualsTable.edit"/>
+                <button id="removeBtn" action="individualsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

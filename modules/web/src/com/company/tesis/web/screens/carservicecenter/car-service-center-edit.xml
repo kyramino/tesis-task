@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ /*
+  ~ * Copyright (c) 2019 Haulmont Technology Ltd. All Rights Reserved.
+  ~ * Haulmont Technology proprietary and confidential.
+  ~ * Use is subject to license terms.
+  ~ */
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.tesis.web.screens.carservicecenter">
+    <data>
+        <instance id="carServiceCenterDc"
+                  class="com.company.tesis.entity.CarServiceCenter"
+                  view="center-item-browse">
+            <loader />
+        </instance>
+        <collection id="citiesDc" class="com.company.tesis.entity.City">
+            <loader id="citiesDl">
+                <query>
+                    <![CDATA[select e from tesis_City e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="employeesDc" class="com.company.tesis.entity.Employee">
+            <loader id="employeesDl">
+                <query>
+                    <![CDATA[select e from tesis_Employee e where e.center = :center]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="carServiceCenterDc">
+            <column width="250px">
+                <textField id="nameField" property="name"/>
+                <textField id="phoneField" property="phone"/>
+                <textField id="addressField" property="address"/>
+                <optionsList id="cityField" optionsContainer="citiesDc" height="100"/>
+            </column>
+        </form>
+        <groupBox caption="Employees">
+            <table id="employeesDcTable" dataContainer="employeesDc" height="200px" width="300px">
+                <columns>
+                    <column id="firstName"/>
+                    <column id="secondName"/>
+                </columns>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

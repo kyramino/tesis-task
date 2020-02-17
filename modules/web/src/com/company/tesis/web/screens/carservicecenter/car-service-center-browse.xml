@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ /*
+  ~ * Copyright (c) 2019 Haulmont Technology Ltd. All Rights Reserved.
+  ~ * Haulmont Technology proprietary and confidential.
+  ~ * Use is subject to license terms.
+  ~ */
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="carServiceCentersTable"
+        messagesPack="com.company.tesis.web.screens.carservicecenter">
+    <data readOnly="true">
+        <collection id="carServiceCentersDc"
+                    class="com.company.tesis.entity.CarServiceCenter"
+                    view="carServiceCenter-view">
+            <loader id="carServiceCentersDl">
+                <query>
+                    <![CDATA[select e from tesis_CarServiceCenter e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="carServiceCentersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="carServiceCentersTable"
+                dataLoader="carServiceCentersDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="carServiceCentersTable"
+                    width="100%"
+                    dataContainer="carServiceCentersDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <group>
+                    <column id="city.name"/>
+                </group>
+                <column id="name"/>
+                <column id="phone"/>
+                <column id="address"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="carServiceCentersTable.create"/>
+                <button id="editBtn" action="carServiceCentersTable.edit"/>
+                <button id="removeBtn" action="carServiceCentersTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

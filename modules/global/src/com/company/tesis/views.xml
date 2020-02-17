@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+
+    <view entity="tesis_CarServiceCenter" name="carServiceCenter-view" extends="_local">
+        <property name="city" view="_minimal"/>
+    </view>
+    <view class="com.company.tesis.entity.CarServiceCenter" name="center-item-browse" extends="_local">
+        <property name="city" view="_minimal"/>
+        <property name="employees" view="_minimal"/>
+    </view>
+    <view entity="tesis_Employee" name="employee-view" extends="_local">
+        <property name="center" view="_minimal"/>
+    </view>
+    <view class="com.company.tesis.entity.Employee" name="employee-item-browse" extends="_local">
+        <property name="center" view="_minimal"/>
+    </view>
+
+</views>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ /*
+  ~ * Copyright (c) 2019 Haulmont Technology Ltd. All Rights Reserved.
+  ~ * Haulmont Technology proprietary and confidential.
+  ~ * Use is subject to license terms.
+  ~ */
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.tesis.web.screens.employee">
+    <data>
+        <instance id="employeeDc"
+                  class="com.company.tesis.entity.Employee"
+                  view="employee-item-browse">
+            <loader/>
+        </instance>
+        <collection id="centersDc" class="com.company.tesis.entity.CarServiceCenter">
+            <loader id="centersDl">
+                <query>
+                    <![CDATA[select e from tesis_CarServiceCenter e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="employeeDc">
+            <column width="250px">
+                <textField id="firstNameField" property="firstName"/>
+                <textField id="secondNameField" property="secondName"/>
+                <dateField id="birthDateField" property="birthDate"/>
+                <textField id="emailField" property="email"/>
+                <textField id="salaryField" property="salary"/>
+                <optionsList id="centersField" optionsContainer="centersDc"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

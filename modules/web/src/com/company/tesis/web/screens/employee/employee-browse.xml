@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ /*
+  ~ * Copyright (c) 2019 Haulmont Technology Ltd. All Rights Reserved.
+  ~ * Haulmont Technology proprietary and confidential.
+  ~ * Use is subject to license terms.
+  ~ */
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="employeesTable"
+        messagesPack="com.company.tesis.web.screens.employee">
+    <data readOnly="true">
+        <collection id="employeesDc"
+                    class="com.company.tesis.entity.Employee"
+                    view="employee-view">
+            <loader id="employeesDl">
+                <query>
+                    <![CDATA[select e from tesis_Employee e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="employeesTable"
+            spacing="true">
+        <label value="Employee"/>
+        <filter id="filter"
+                applyTo="employeesTable"
+                dataLoader="employeesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="employeesTable"
+                    width="100%"
+                    dataContainer="employeesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <group>
+                    <column id="center.name"/>
+                </group>
+                <column id="firstName"/>
+                <column id="secondName"/>
+                <column id="birthDate"/>
+                <column id="email"/>
+                <column id="salary"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="employeesTable.create"/>
+                <button id="editBtn" action="employeesTable.edit"/>
+                <button id="removeBtn" action="employeesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

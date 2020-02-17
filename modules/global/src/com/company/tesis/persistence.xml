@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="tesis" transaction-type="RESOURCE_LOCAL">
+
+        <class>com.company.tesis.entity.City</class>
+        <class>com.company.tesis.entity.CarServiceCenter</class>
+        <class>com.company.tesis.entity.Customer</class>
+        <class>com.company.tesis.entity.Employee</class>
+        <class>com.company.tesis.entity.Repair</class>
+        <class>com.company.tesis.entity.Individual</class>
+        <class>com.company.tesis.entity.Company</class>
+    </persistence-unit>
+</persistence>

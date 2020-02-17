@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ /*
+  ~ * Copyright (c) 2019 Haulmont Technology Ltd. All Rights Reserved.
+  ~ * Haulmont Technology proprietary and confidential.
+  ~ * Use is subject to license terms.
+  ~ */
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.tesis.web.screens.individual">
+    <data>
+        <instance id="individualDc"
+                  class="com.company.tesis.entity.Individual"
+                  view="_local">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <label value="Individual customers"/>
+        <form id="form" dataContainer="individualDc">
+            <column width="250px">
+                <textField id="nameField" property="name"/>
+                <textField id="phoneField" property="phone"/>
+                <textField id="emailField" property="email"/>
+                <textField id="passportNoField" property="passportNo"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
