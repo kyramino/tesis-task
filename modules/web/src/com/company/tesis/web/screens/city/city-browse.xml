@@ -43,6 +43,7 @@
             <columns>
                 <column id="name"/>
                 <column id="code"/>
+                <column id="isDefault"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

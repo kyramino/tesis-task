@@ -8,8 +8,22 @@
 
 package com.company.tesis.web.screens.city;
 
+import com.haulmont.cuba.core.entity.Entity;
+import com.haulmont.cuba.gui.ScreenBuilders;
+import com.haulmont.cuba.gui.actions.list.EditAction;
+import com.haulmont.cuba.gui.components.Action;
+import com.haulmont.cuba.gui.components.GroupTable;
+import com.haulmont.cuba.gui.components.Table;
+import com.haulmont.cuba.gui.data.CollectionDatasource;
+import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
 import com.company.tesis.entity.City;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.Collection;
+import java.util.Map;
+import java.util.UUID;
 
 
 /**
@@ -22,4 +36,24 @@ import com.company.tesis.entity.City;
 @LookupComponent("citiesTable")
 @LoadDataBeforeShow
 public class CityBrowse extends StandardLookup<City> {
+
+    @Inject
+    private ScreenBuilders screenBuilders;
+
+    @Inject
+    private Table<City> citiesTable;
+
+    @Inject
+    private CollectionLoader<City> citiesDl;
+
+
+    @Subscribe("citiesTable.edit")
+    protected void onEditActionPerformed(Action.ActionPerformedEvent event) {
+        screenBuilders.editor(citiesTable)
+                      .withListComponent(citiesTable)
+                      .withScreenClass(CityEdit.class)   // specific editor screen
+                      .withLaunchMode(OpenMode.DIALOG)        // open as modal dialog
+                      .build()
+                      .show().addAfterCloseListener(afterCloseEvent -> citiesDl.load());
+    }
 }

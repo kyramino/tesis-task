@@ -9,6 +9,7 @@
 package com.company.tesis.web.screens.carservicecenter;
 
 import com.company.tesis.entity.*;
+import com.company.tesis.service.CityService;
 import com.company.tesis.web.screens.employee.EmployeeEdit;
 import com.company.tesis.web.screens.individual.IndividualEdit;
 import com.company.tesis.web.screens.repair.RepairEdit;
@@ -44,6 +45,9 @@ public class CarServiceCenterEdit extends StandardEditor<CarServiceCenter> {
     @Inject
     private ScreenBuilders screenBuilders;
 
+    @Inject
+    private CityService cityService;
+
     @Subscribe("cityField")
     private void onOptionsListChanging(OptionsList.ValueChangeEvent<City> event) {
         getEditedEntity().setCity(event.getComponent().getValue());
@@ -71,5 +75,10 @@ public class CarServiceCenterEdit extends StandardEditor<CarServiceCenter> {
                       .withLaunchMode(OpenMode.DIALOG)        // open as modal dialog
                       .build()
                       .show();
+    }
+
+    @Subscribe
+    protected void onInitEntity(InitEntityEvent<CarServiceCenter> event){
+        event.getEntity().setCity(cityService.getDefaultCity());
     }
 }

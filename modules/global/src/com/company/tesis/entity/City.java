@@ -9,6 +9,8 @@ package com.company.tesis.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.Listeners;
+import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,9 +21,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
+@PublishEntityChangedEvents
 @NamePattern("%s|name")
 @Table(name = "TESIS_CITY")
 @Entity(name = "tesis_City")
+@Listeners("tesis_CityChangedListener")
 public class City extends StandardEntity {
 
     private static final long serialVersionUID = -2557385710735762265L;
@@ -31,12 +35,23 @@ public class City extends StandardEntity {
     @Column(name = "NAME", nullable = false)
     protected String name;
 
+    @Column(name = "IS_DEFAULT")
+    protected Boolean isDefault = false;
+
     @OneToMany(mappedBy = "city")
     protected List<CarServiceCenter> centers;
 
     @Pattern(message = "Code of the city contains only number", regexp = "\\d+")
     @Column(name = "CODE")
     protected String code;
+
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
 
     public void setCode(String code) {
         this.code = code;

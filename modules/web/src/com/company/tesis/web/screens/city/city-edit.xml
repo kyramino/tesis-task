@@ -26,6 +26,7 @@
             <column width="250px">
                 <textField id="nameField" property="name"/>
                 <textField id="codeField" property="code"/>
+                <checkBox id="defaultField" property="isDefault"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">
