@@ -14,6 +14,7 @@ import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.List;
@@ -25,6 +26,7 @@ public class CarServiceCenter extends StandardEntity {
 
     private static final long serialVersionUID = -3558041929991875742L;
 
+    @NotEmpty
     @NotNull
     @Column(name = "NAME", nullable = false)
     protected String name;
@@ -51,6 +53,8 @@ public class CarServiceCenter extends StandardEntity {
     @ManyToMany
     protected List<Customer> customers;
 
+    @Composition
+    @OnDelete(DeletePolicy.DENY)
     @OneToMany(mappedBy = "center")
     protected List<Employee> employees;
 

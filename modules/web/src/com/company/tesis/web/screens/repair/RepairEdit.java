@@ -6,10 +6,10 @@
  * /
  */
 
-package com.company.tesis.web.screens.city;
+package com.company.tesis.web.screens.repair;
 
 import com.haulmont.cuba.gui.screen.*;
-import com.company.tesis.entity.City;
+import com.company.tesis.entity.Repair;
 
 
 /**
@@ -17,9 +17,9 @@ import com.company.tesis.entity.City;
  * @author sergey.vasilev
  * @version 1
  */
-@UiController("tesis_City.edit")
-@UiDescriptor("city-edit.xml")
-@EditedEntityContainer("cityDc")
+@UiController("tesis_Repair.edit")
+@UiDescriptor("repair-edit.xml")
+@EditedEntityContainer("repairDc")
 @LoadDataBeforeShow
-public class CityEdit extends StandardEditor<City> {
+public class RepairEdit extends StandardEditor<Repair> {
 }

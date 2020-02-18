@@ -15,7 +15,7 @@ import com.company.tesis.entity.Employee;
 /**
  *
  * @author sergey.vasilev
- * @version $Id$
+ * @version 1
  */
 @UiController("tesis_Employee.browse")
 @UiDescriptor("employee-browse.xml")

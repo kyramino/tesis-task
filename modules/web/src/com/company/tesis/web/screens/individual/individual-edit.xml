@@ -21,7 +21,7 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="editActions" spacing="true">
-        <label value="Individual customers"/>
+        <label value="Individual customer"/>
         <form id="form" dataContainer="individualDc">
             <column width="250px">
                 <textField id="nameField" property="name"/>

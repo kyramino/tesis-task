@@ -15,7 +15,7 @@ import com.company.tesis.entity.City;
 /**
  *
  * @author sergey.vasilev
- * @version $Id$
+ * @version 1
  */
 @UiController("tesis_City.browse")
 @UiDescriptor("city-browse.xml")

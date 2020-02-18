@@ -16,6 +16,9 @@
                   class="com.company.tesis.entity.CarServiceCenter"
                   view="center-item-browse">
             <loader />
+            <collection id="customersDc" property="customers"/>
+            <collection id="repairsDc" property="repairs"/>
+            <collection id="employeesDc" property="employees"/>
         </instance>
         <collection id="citiesDc" class="com.company.tesis.entity.City">
             <loader id="citiesDl">
@@ -24,36 +27,77 @@
                 </query>
             </loader>
         </collection>
-        <collection id="employeesDc" class="com.company.tesis.entity.Employee">
-            <loader id="employeesDl">
-                <query>
-                    <![CDATA[select e from tesis_Employee e where e.center = :center]]>
-                </query>
-            </loader>
-        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="carServiceCenterDc">
-            <column width="250px">
-                <textField id="nameField" property="name"/>
-                <textField id="phoneField" property="phone"/>
-                <textField id="addressField" property="address"/>
-                <optionsList id="cityField" optionsContainer="citiesDc" height="100"/>
-            </column>
-        </form>
-        <groupBox caption="Employees">
-            <table id="employeesDcTable" dataContainer="employeesDc" height="200px" width="300px">
-                <columns>
-                    <column id="firstName"/>
-                    <column id="secondName"/>
-                </columns>
-            </table>
-        </groupBox>
+        <label value="Car service center"/>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
         </hbox>
+        <tabSheet>
+            <tab caption="Clients" id="tab_clients" spacing="true" margin="true,false,false,false">
+                <groupBox caption="Customers">
+                    <table id="customersDcTable" dataContainer="customersDc" height="200px" width="300px">
+                        <actions>
+                            <action id="add" type="add"/>
+                            <action id="exclude" type="exclude"/>
+                        </actions>
+                        <columns>
+                            <column id="name"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="customersDcTable.add"/>
+                            <button action="customersDcTable.exclude"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </tab>
+            <tab caption="Centers" margin="true,false,false,false" spacing="true" id="tab-centers">
+                <form id="form" dataContainer="carServiceCenterDc">
+                    <column width="250px">
+                        <textField id="nameField" property="name"/>
+                        <textField id="phoneField" property="phone"/>
+                        <textField id="addressField" property="address"/>
+                        <optionsList id="cityField" optionsContainer="citiesDc" height="100" width="300"/>
+                    </column>
+                </form>
+                <groupBox caption="Repairs">
+                    <table id="repairsDcTable" dataContainer="repairsDc" height="200px" width="300px">
+                        <actions>
+                            <action id="create" type="create"/>
+                            <action id="edit" type="edit"/>
+                            <action id="remove" type="remove"/>
+                        </actions>
+                        <columns>
+                            <column id="description" link="true" linkScreen="tesis_Repair.edit" linkScreenOpenType="DIALOG"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="repairsDcTable.create"/>
+                            <button action="repairsDcTable.edit"/>
+                            <button action="repairsDcTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+                <groupBox caption="Employees" width="100%">
+                    <table id="employeesDcTable" dataContainer="employeesDc" height="200px" width="300px">
+                        <actions>
+                            <action id="create" type="create"/>
+                            <action id="edit" type="edit"/>
+                            <action id="remove" type="remove"/>
+                        </actions>
+                        <columns>
+                            <column id="firstName" link="true" linkScreen="tesis_Employee.edit" linkScreenOpenType="DIALOG"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="employeesDcTable.create"/>
+                            <button action="employeesDcTable.edit"/>
+                            <button action="employeesDcTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </tab>
+        </tabSheet>
     </layout>
 </window>

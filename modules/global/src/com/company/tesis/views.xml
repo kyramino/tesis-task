@@ -3,16 +3,18 @@
 
     <view entity="tesis_CarServiceCenter" name="carServiceCenter-view" extends="_local">
         <property name="city" view="_minimal"/>
+        <property name="customers" view="_local"/>
     </view>
     <view class="com.company.tesis.entity.CarServiceCenter" name="center-item-browse" extends="_local">
         <property name="city" view="_minimal"/>
         <property name="employees" view="_minimal"/>
+        <property name="customers" view="_minimal"/>
+        <property name="repairs" view="_minimal"/>
     </view>
     <view entity="tesis_Employee" name="employee-view" extends="_local">
         <property name="center" view="_minimal"/>
     </view>
-    <view class="com.company.tesis.entity.Employee" name="employee-item-browse" extends="_local">
+    <view entity="tesis_Repair" name="repair-view" extends="_local">
         <property name="center" view="_minimal"/>
     </view>
-
 </views>

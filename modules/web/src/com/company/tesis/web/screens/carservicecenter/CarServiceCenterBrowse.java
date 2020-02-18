@@ -15,7 +15,7 @@ import com.company.tesis.entity.CarServiceCenter;
 /**
  *
  * @author sergey.vasilev
- * @version $Id$
+ * @version 1
  */
 @UiController("tesis_CarServiceCenter.browse")
 @UiDescriptor("car-service-center-browse.xml")

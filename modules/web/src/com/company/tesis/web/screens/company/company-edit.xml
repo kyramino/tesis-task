@@ -21,7 +21,7 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="editActions" spacing="true">
-        <label value="Company customers"/>
+        <label value="Company customer"/>
         <form id="form" dataContainer="companyDc">
             <column width="250px">
                 <textField id="nameField" property="name"/>

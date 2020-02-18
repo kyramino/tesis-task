@@ -15,7 +15,7 @@ import com.company.tesis.entity.Company;
 /**
  *
  * @author sergey.vasilev
- * @version $Id$
+ * @version 1
  */
 @UiController("tesis_Company.edit")
 @UiDescriptor("company-edit.xml")

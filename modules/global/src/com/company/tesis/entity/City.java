@@ -14,7 +14,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @NamePattern("%s|name")
@@ -24,6 +26,7 @@ public class City extends StandardEntity {
 
     private static final long serialVersionUID = -2557385710735762265L;
 
+    @NotBlank
     @NotNull
     @Column(name = "NAME", nullable = false)
     protected String name;
@@ -31,8 +34,17 @@ public class City extends StandardEntity {
     @OneToMany(mappedBy = "city")
     protected List<CarServiceCenter> centers;
 
+    @Pattern(message = "Code of the city contains only number", regexp = "\\d+")
     @Column(name = "CODE")
-    protected Long code;
+    protected String code;
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCode() {
+        return code;
+    }
 
     public List<CarServiceCenter> getCenters() {
         return centers;
@@ -40,14 +52,6 @@ public class City extends StandardEntity {
 
     public void setCenters(List<CarServiceCenter> centers) {
         this.centers = centers;
-    }
-
-    public Long getCode() {
-        return code;
-    }
-
-    public void setCode(Long code) {
-        this.code = code;
     }
 
     public String getName() {

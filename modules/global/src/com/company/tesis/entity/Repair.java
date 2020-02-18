@@ -6,7 +6,7 @@ import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @NamePattern("%s|description")
@@ -16,7 +16,7 @@ public class Repair extends StandardEntity {
 
     private static final long serialVersionUID = -2482240500369579037L;
 
-    @NotBlank(message = "Description can not be empty")
+    @NotEmpty(message = "Description can not be empty")
     @NotNull
     @Column(name = "DESCRIPTION", nullable = false)
     protected String description;

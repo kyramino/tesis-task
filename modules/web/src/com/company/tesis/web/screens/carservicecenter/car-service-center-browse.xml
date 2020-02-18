@@ -26,6 +26,7 @@
                 width="800"/>
     <layout expand="carServiceCentersTable"
             spacing="true">
+        <label value="Car service centers"/>
         <filter id="filter"
                 applyTo="carServiceCentersTable"
                 dataLoader="carServiceCentersDl">

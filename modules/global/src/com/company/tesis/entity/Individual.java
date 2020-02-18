@@ -8,11 +8,14 @@
 
 package com.company.tesis.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@NamePattern("%s|name")
 @DiscriminatorValue("CUSTOMER_INDIVIDUAL")
 @PrimaryKeyJoinColumn(name = "customer_id", referencedColumnName = "ID")
 @Table(name = "TESIS_CUSTOMER_INDIVIDUAL")
@@ -21,8 +24,8 @@ public class Individual extends Customer {
 
     private static final long serialVersionUID = 989733407613167618L;
 
+    @Pattern(message = "Individual customers passport number can contains only number", regexp = "\\d+")
     @NotBlank
-    @Pattern(message = "Passport number contains only numbers", regexp = "/d+")
     @NotNull
     @Column(name = "PASSPORT_NO", nullable = false)
     protected String passportNo;

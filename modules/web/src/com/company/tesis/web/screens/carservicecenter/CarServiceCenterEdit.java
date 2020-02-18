@@ -8,23 +8,26 @@
 
 package com.company.tesis.web.screens.carservicecenter;
 
-import com.company.tesis.entity.City;
-import com.company.tesis.entity.Employee;
-import com.haulmont.cuba.gui.components.GroupTable;
-import com.haulmont.cuba.gui.components.OptionsList;
-import com.haulmont.cuba.gui.components.TextField;
+import com.company.tesis.entity.*;
+import com.company.tesis.web.screens.employee.EmployeeEdit;
+import com.company.tesis.web.screens.individual.IndividualEdit;
+import com.company.tesis.web.screens.repair.RepairEdit;
+import com.haulmont.cuba.gui.ScreenBuilders;
+import com.haulmont.cuba.gui.components.*;
+import com.haulmont.cuba.gui.components.data.TableItems;
+import com.haulmont.cuba.gui.components.data.table.ContainerTableItems;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
-import com.company.tesis.entity.CarServiceCenter;
 
 import javax.inject.Inject;
-
+import java.util.Collection;
+import java.util.List;
 
 
 /**
  *
  * @author sergey.vasilev
- * @version $Id$
+ * @version 1
  */
 @UiController("tesis_CarServiceCenter.edit")
 @UiDescriptor("car-service-center-edit.xml")
@@ -33,16 +36,40 @@ import javax.inject.Inject;
 public class CarServiceCenterEdit extends StandardEditor<CarServiceCenter> {
 
     @Inject
-    private CollectionLoader<Employee> employeesDl;
+    private Table<Employee> employeesDcTable;
+
+    @Inject
+    private Table<Repair> repairsDcTable;
+
+    @Inject
+    private ScreenBuilders screenBuilders;
 
     @Subscribe("cityField")
     private void onOptionsListChanging(OptionsList.ValueChangeEvent<City> event) {
         getEditedEntity().setCity(event.getComponent().getValue());
     }
 
-    @Subscribe
-    protected void onBeforeShow(BeforeShowEvent event){
-        employeesDl.setParameter("center", getEditedEntity());
-        getScreenData().loadAll();
+    @Subscribe("employeesDcTable.create")
+    protected void onEmployeesTableCreateActionPerformed(Action.ActionPerformedEvent event) {
+        Employee employee = new Employee();
+        employee.setCenter(getEditedEntity());
+        screenBuilders.editor(employeesDcTable)
+                      .newEntity().newEntity(employee)
+                      .withScreenClass(EmployeeEdit.class)     // specific editor screen
+                      .withLaunchMode(OpenMode.DIALOG)        // open as modal dialog
+                      .build()
+                      .show();
+    }
+
+    @Subscribe("repairsDcTable.create")
+    protected void onRepairsTableCreateActionPerformed(Action.ActionPerformedEvent event) {
+        Repair repair = new Repair();
+        repair.setCenter(getEditedEntity());
+        screenBuilders.editor(repairsDcTable)
+                      .newEntity().newEntity(repair)
+                      .withScreenClass(RepairEdit.class)     // specific editor screen
+                      .withLaunchMode(OpenMode.DIALOG)        // open as modal dialog
+                      .build()
+                      .show();
     }
 }

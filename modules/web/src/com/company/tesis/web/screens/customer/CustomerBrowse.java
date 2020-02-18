@@ -6,10 +6,10 @@
  * /
  */
 
-package com.company.tesis.web.screens.city;
+package com.company.tesis.web.screens.customer;
 
 import com.haulmont.cuba.gui.screen.*;
-import com.company.tesis.entity.City;
+import com.company.tesis.entity.Customer;
 
 
 /**
@@ -17,9 +17,9 @@ import com.company.tesis.entity.City;
  * @author sergey.vasilev
  * @version 1
  */
-@UiController("tesis_City.edit")
-@UiDescriptor("city-edit.xml")
-@EditedEntityContainer("cityDc")
+@UiController("tesis_Customer.browse")
+@UiDescriptor("customer-browse.xml")
+@LookupComponent("customersTable")
 @LoadDataBeforeShow
-public class CityEdit extends StandardEditor<City> {
+public class CustomerBrowse extends StandardLookup<Customer> {
 }
