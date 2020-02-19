@@ -7,10 +7,13 @@
  */
 package com.company.tesis.entity;
 
+import com.company.tesis.validator.Unique;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.Listeners;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,13 +35,15 @@ public class City extends StandardEntity {
 
     @NotBlank
     @NotNull
-    @Column(name = "NAME", nullable = false)
+    @Unique
+    @Column(name = "NAME", nullable = false, unique = true)
     protected String name;
 
     @Column(name = "IS_DEFAULT")
     protected Boolean isDefault = false;
 
     @OneToMany(mappedBy = "city")
+    @OnDelete(DeletePolicy.DENY)
     protected List<CarServiceCenter> centers;
 
     @Pattern(message = "Code of the city contains only number", regexp = "\\d+")

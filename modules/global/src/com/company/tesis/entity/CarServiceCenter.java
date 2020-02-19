@@ -10,10 +10,10 @@ package com.company.tesis.entity;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.cuba.core.entity.annotation.Listeners;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.security.entity.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -33,6 +33,10 @@ public class CarServiceCenter extends StandardEntity {
     @NotNull
     @Column(name = "NAME", nullable = false)
     protected String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CREATOR_ID")
+    protected User creator;
 
     @Pattern(message = "{msg://tesis_CarServiceCenter.phone.validation.Pattern}", regexp = "\\d+")
     @Column(name = "PHONE")
@@ -60,6 +64,14 @@ public class CarServiceCenter extends StandardEntity {
     @OnDelete(DeletePolicy.DENY)
     @OneToMany(mappedBy = "center")
     protected List<Employee> employees;
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
 
     public List<Repair> getRepairs() {
         return repairs;

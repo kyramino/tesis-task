@@ -11,20 +11,14 @@ package com.company.tesis.web.screens.carservicecenter;
 import com.company.tesis.entity.*;
 import com.company.tesis.service.CityService;
 import com.company.tesis.web.screens.employee.EmployeeEdit;
-import com.company.tesis.web.screens.individual.IndividualEdit;
 import com.company.tesis.web.screens.repair.RepairEdit;
 import com.haulmont.cuba.gui.ScreenBuilders;
+import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.components.*;
-import com.haulmont.cuba.gui.components.data.TableItems;
-import com.haulmont.cuba.gui.components.data.table.ContainerTableItems;
-import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.DataContext;
-import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
-import java.util.Collection;
-import java.util.List;
 
 
 /**
@@ -45,6 +39,9 @@ public class CarServiceCenterEdit extends StandardEditor<CarServiceCenter> {
     private Table<Repair> repairsDcTable;
 
     @Inject
+    private Table<Customer> customersDcTable;
+
+    @Inject
     private ScreenBuilders screenBuilders;
 
     @Inject
@@ -54,13 +51,34 @@ public class CarServiceCenterEdit extends StandardEditor<CarServiceCenter> {
     private TabSheet tabSheet;
 
     @Inject
+    private UiComponents uiComponents;
+
+    @Inject
     private DataContext dataContext;
+
+    @Inject
+    private MessageBundle messageBundle;
+
+
+    @Subscribe
+    private void onInit(InitEvent event) {
+        customersDcTable.addGeneratedColumn(messageBundle.getMessage("typeClientColumnName"), entity -> {
+            Label<String> label = uiComponents.create(Label.NAME);
+            if (entity instanceof Individual) {
+                label.setValue(messageBundle.getMessage("individualClient"));
+            } else {
+                label.setValue(messageBundle.getMessage("companyClient"));
+            }
+            return label;
+        });
+    }
 
     @Subscribe
     protected void onBeforeShow(BeforeShowEvent  event) {
         getScreenData().loadAll();
         refreshTabCaption();
         dataContext.addChangeListener(changeEvent -> refreshTabCaption());
+
     }
 
     @Subscribe("cityField")

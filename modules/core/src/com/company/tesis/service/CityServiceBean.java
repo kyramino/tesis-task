@@ -14,8 +14,10 @@ import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @Service(CityService.NAME)
 public class CityServiceBean implements CityService {
@@ -27,20 +29,34 @@ public class CityServiceBean implements CityService {
     @Override
     public City getDefaultCity() {
         EntityManager entityManager = persistence.getEntityManager();
-        return entityManager.createNativeQuery("SELECT * FROM TESIS_CITY where IS_DEFAULT IS TRUE", City.class).getFirstResult();
+        return entityManager.createQuery("SELECT e FROM tesis_City e where e.isDefault IS TRUE", City.class)
+                            .getFirstResult();
     }
 
     @Transactional
+    @Override
     public void resetDefaultCity(City exclusionCity){
         EntityManager entityManager = persistence.getEntityManager();
         Query query;
         if(exclusionCity != null) {
-            query = entityManager.createNativeQuery("UPDATE TESIS_CITY SET IS_DEFAULT = FALSE WHERE ID != ?1");
-            query.setParameter(1, exclusionCity.getId());
+            query = entityManager.createQuery("UPDATE tesis_City e SET e.isDefault = FALSE WHERE e.id <> :id");
+            query.setParameter("id", exclusionCity.getId());
         } else {
-            query = entityManager.createNativeQuery("UPDATE TESIS_CITY SET IS_DEFAULT = FALSE");
+            query = entityManager.createQuery("UPDATE tesis_City e SET e.isDefault = FALSE");
         }
         query.executeUpdate();
+    }
+
+    @Transactional
+    @Override
+    public boolean hasCityWithSuchName(String name) {
+        EntityManager entityManager = persistence.getEntityManager();
+        if (!StringUtils.isEmpty(name)) {
+            Query query = entityManager.createQuery("SELECT e FROM tesis_City e where e.name like ?1", City.class);
+            query.setParameter(1, name);
+            return !query.getResultList().isEmpty();
+        }
+        return false;
     }
 
 }

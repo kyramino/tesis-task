@@ -48,6 +48,7 @@ create table TESIS_CAR_SERVICE_CENTER (
     DELETED_BY varchar(50),
     --
     NAME varchar(255) not null,
+    CREATOR_ID varchar(36) not null,
     PHONE varchar(255),
     CITY_ID varchar(36),
     ADDRESS varchar(255),

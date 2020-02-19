@@ -26,7 +26,6 @@ public class CityChangedListener implements BeforeUpdateEntityListener<City> {
     @Inject
     private CityService cityService;
 
-
     @Override
     public void onBeforeUpdate(City entity, EntityManager entityManager) {
         if(entity.getIsDefault()) {

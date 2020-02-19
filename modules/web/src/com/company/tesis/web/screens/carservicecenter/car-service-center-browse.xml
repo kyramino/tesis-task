@@ -31,6 +31,9 @@
                 applyTo="carServiceCentersTable"
                 dataLoader="carServiceCentersDl">
             <properties include=".*"/>
+            <custom name="employee" paramClass="java.lang.String" caption="employees" join="join {E}.employees em">
+                em.firstName like ?
+            </custom>
         </filter>
         <groupTable id="carServiceCentersTable"
                     width="100%"

@@ -17,4 +17,6 @@ public interface CityService {
     City getDefaultCity();
 
     void resetDefaultCity(City exclusionCity);
+
+    boolean hasCityWithSuchName(String name);
 }
