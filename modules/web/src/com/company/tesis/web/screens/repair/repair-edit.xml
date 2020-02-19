@@ -17,6 +17,20 @@
                   view="repair-view">
             <loader/>
         </instance>
+        <collection id="centersDc" class="com.company.tesis.entity.CarServiceCenter" view="center-item-browse">
+            <loader id="centersDl">
+                <query>
+                    <![CDATA[select e from tesis_CarServiceCenter e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="employeesDc" class="com.company.tesis.entity.Employee"  view="_minimal">
+            <loader id = "employeesDl">
+                <query>
+                    <![CDATA[select e from tesis_Employee e where e.center = :center]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
@@ -25,7 +39,8 @@
         <form id="form" dataContainer="repairDc">
             <column width="250px">
                 <textField id="descriptionField" property="description"/>
-                <textField id="center" editable="false" property="center.name"/>
+                <lookupField id="centerField" dataContainer="repairDc" optionsContainer="centersDc" property="center"/>
+                <lookupField id="employeeField" dataContainer="repairDc" optionsContainer="employeesDc" property="employee"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

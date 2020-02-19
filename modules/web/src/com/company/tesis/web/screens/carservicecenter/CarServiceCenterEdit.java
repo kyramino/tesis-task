@@ -18,6 +18,8 @@ import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.data.TableItems;
 import com.haulmont.cuba.gui.components.data.table.ContainerTableItems;
 import com.haulmont.cuba.gui.model.CollectionLoader;
+import com.haulmont.cuba.gui.model.DataContext;
+import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
@@ -47,6 +49,19 @@ public class CarServiceCenterEdit extends StandardEditor<CarServiceCenter> {
 
     @Inject
     private CityService cityService;
+
+    @Inject
+    private TabSheet tabSheet;
+
+    @Inject
+    private DataContext dataContext;
+
+    @Subscribe
+    protected void onBeforeShow(BeforeShowEvent  event) {
+        getScreenData().loadAll();
+        refreshTabCaption();
+        dataContext.addChangeListener(changeEvent -> refreshTabCaption());
+    }
 
     @Subscribe("cityField")
     private void onOptionsListChanging(OptionsList.ValueChangeEvent<City> event) {
@@ -80,5 +95,14 @@ public class CarServiceCenterEdit extends StandardEditor<CarServiceCenter> {
     @Subscribe
     protected void onInitEntity(InitEntityEvent<CarServiceCenter> event){
         event.getEntity().setCity(cityService.getDefaultCity());
+    }
+
+    private void refreshTabCaption(){
+        for(TabSheet.Tab tab : tabSheet.getTabs()) {
+            if ("tab_clients".equals(tab.getName())) {
+                int size = getEditedEntity().getCustomers() != null ? getEditedEntity().getCustomers().size() : 0;
+                tab.setCaption("Clients (" + size + ")");
+            }
+        }
     }
 }

@@ -36,33 +36,8 @@
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
         </hbox>
-        <tabSheet>
-            <tab caption="Clients" id="tab_clients" spacing="true" margin="true,false,false,false">
-                <groupBox caption="Customers">
-                    <table id="customersDcTable" dataContainer="customersDc" height="200px" width="300px">
-                        <actions>
-                            <action id="add" type="add"/>
-                            <action id="exclude" type="exclude"/>
-                        </actions>
-                        <columns>
-                            <column id="name"/>
-                        </columns>
-                        <buttonsPanel>
-                            <button action="customersDcTable.add"/>
-                            <button action="customersDcTable.exclude"/>
-                        </buttonsPanel>
-                    </table>
-                </groupBox>
-            </tab>
-            <tab caption="Centers" margin="true,false,false,false" spacing="true" id="tab-centers">
-                <form id="form" dataContainer="carServiceCenterDc">
-                    <column width="250px">
-                        <textField id="nameField" property="name"/>
-                        <textField id="phoneField" property="phone"/>
-                        <textField id="addressField" property="address"/>
-                        <optionsList id="cityField" optionsContainer="citiesDc" height="100" width="300"/>
-                    </column>
-                </form>
+        <tabSheet id="tabSheet">
+            <tab caption="Centers" margin="true,false,false,false" spacing="true" id="tab_centers">
                 <groupBox caption="Repairs">
                     <table id="repairsDcTable" dataContainer="repairsDc" height="200px" width="300px">
                         <actions>
@@ -71,7 +46,7 @@
                             <action id="remove" type="remove"/>
                         </actions>
                         <columns>
-                            <column id="description" link="true" linkScreen="tesis_Repair.edit" linkScreenOpenType="DIALOG"/>
+                            <column id="description" link="true"/>
                         </columns>
                         <buttonsPanel>
                             <button action="repairsDcTable.create"/>
@@ -94,6 +69,31 @@
                             <button action="employeesDcTable.create"/>
                             <button action="employeesDcTable.edit"/>
                             <button action="employeesDcTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+                <form id="form" dataContainer="carServiceCenterDc">
+                    <column width="250px">
+                        <textField id="nameField" property="name"/>
+                        <textField id="phoneField" property="phone"/>
+                        <textField id="addressField" property="address"/>
+                        <optionsList id="cityField" optionsContainer="citiesDc" height="100" width="300"/>
+                    </column>
+                </form>
+            </tab>
+            <tab caption="Clients" id="tab_clients" lazy="false" spacing="true" margin="true,false,false,false">
+                <groupBox caption="Customers">
+                    <table id="customersDcTable" dataContainer="customersDc" height="200px" width="300px">
+                        <actions>
+                            <action id="add" type="add"/>
+                            <action id="exclude" type="exclude"/>
+                        </actions>
+                        <columns>
+                            <column id="name"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="customersDcTable.add"/>
+                            <button action="customersDcTable.exclude"/>
                         </buttonsPanel>
                     </table>
                 </groupBox>

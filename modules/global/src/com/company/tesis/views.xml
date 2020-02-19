@@ -16,5 +16,6 @@
     </view>
     <view entity="tesis_Repair" name="repair-view" extends="_local">
         <property name="center" view="_minimal"/>
+        <property name="employee" view="_minimal"/>
     </view>
 </views>
