@@ -26,7 +26,6 @@
                 width="800"/>
     <layout expand="employeesTable"
             spacing="true">
-        <label value="Employee"/>
         <filter id="filter"
                 applyTo="employeesTable"
                 dataLoader="employeesDl">
@@ -36,19 +35,19 @@
                     width="100%"
                     dataContainer="employeesDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="create" type="create" caption="mainMsg://create"/>
+                <action id="edit" type="edit" caption="mainMsg://edit"/>
+                <action id="remove" type="remove" caption="mainMsg://remove"/>
             </actions>
             <columns>
                 <group>
-                    <column id="center.name"/>
+                    <column id="center.name" caption="msg://employeeCenter"/>
                 </group>
-                <column id="firstName"/>
-                <column id="secondName"/>
-                <column id="birthDate"/>
-                <column id="email"/>
-                <column id="salary"/>
+                <column id="firstName" caption="msg://employeeName"/>
+                <column id="secondName" caption="msg://employeeSurname"/>
+                <column id="birthDate" caption="msg://employeeBirthDate"/>
+                <column id="email" caption="msg://employeeEmail"/>
+                <column id="salary" caption="msg://employeeSalary"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

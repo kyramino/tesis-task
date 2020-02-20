@@ -17,12 +17,12 @@ import java.lang.annotation.Target;
 
 /**
  * @author sergey.vasilev
- * @version $
+ * @version 1
  */
-@Target({ElementType.FIELD})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = UniqueCityNameValidator.class)
-public @interface Unique {
+public @interface UniqueCityName {
 
     String message() default "{msg://com.company.tesis.entity/cityUnique}";
 

@@ -10,7 +10,6 @@ package com.company.tesis.web.screens.repair;
 
 import com.company.tesis.entity.CarServiceCenter;
 import com.company.tesis.entity.Employee;
-import com.company.tesis.web.screens.employee.EmployeeEdit;
 import com.haulmont.cuba.gui.components.LookupField;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.DataContext;
@@ -45,7 +44,7 @@ public class RepairEdit extends StandardEditor<Repair> {
     private CollectionLoader<Employee> employeesDl;
 
     @Subscribe
-    protected void onBeforeShow(BeforeShowEvent  event) {
+    private void onBeforeShow(BeforeShowEvent event) {
         employeesDl.setParameter("center", getEditedEntity().getCenter());
         getScreenData().loadAll();
         dataContext.addChangeListener(changeEvent -> updateEmployeeField());

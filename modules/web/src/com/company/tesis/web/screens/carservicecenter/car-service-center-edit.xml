@@ -31,22 +31,31 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="editActions" spacing="true">
-        <label value="Car service center"/>
-        <hbox id="editActions" spacing="true">
+        <hbox id="editActions" spacing="true" height="auto">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
         </hbox>
+        <form id="form" dataContainer="carServiceCenterDc">
+            <column width="250px">
+                <textField id="nameField" property="name" caption="msg://centerName"/>
+                <textField id="phoneField" property="phone" caption="msg://centerPhone"/>
+                <textField id="addressField" property="address" caption="msg://centerAddress"/>
+                <lookupField id="cityField" dataContainer="carServiceCenterDc" optionsContainer="citiesDc"
+                             property="city" caption="msg://centerCity"/>
+                <textField id="creatorField" editable="false" property="creator.login" caption="msg://creator"/>
+            </column>
+        </form>
         <tabSheet id="tabSheet">
-            <tab caption="Centers" margin="true,false,false,false" spacing="true" id="tab_centers">
-                <groupBox caption="Repairs">
-                    <table id="repairsDcTable" dataContainer="repairsDc" height="200px" width="300px">
+            <tab caption="msg://tabCenter" margin="true,false,false,false" id="tabCenters" spacing="true">
+                <groupBox caption="msg://repairs">
+                    <table id="repairsDcTable" dataContainer="repairsDc" height="200px" width="700px">
                         <actions>
-                            <action id="create" type="create"/>
-                            <action id="edit" type="edit"/>
-                            <action id="remove" type="remove"/>
+                            <action id="create" type="create" caption="mainMsg://create"/>
+                            <action id="edit" type="edit" caption="mainMsg://edit"/>
+                            <action id="remove" type="remove" caption="mainMsg://remove"/>
                         </actions>
                         <columns>
-                            <column id="description" link="true"/>
+                            <column id="description" caption="msg://repairDescripntion"/>
                         </columns>
                         <buttonsPanel>
                             <button action="repairsDcTable.create"/>
@@ -55,15 +64,18 @@
                         </buttonsPanel>
                     </table>
                 </groupBox>
-                <groupBox caption="Employees" width="100%">
-                    <table id="employeesDcTable" dataContainer="employeesDc" height="200px" width="300px">
+                <groupBox caption="msg://centerEmployees" width="100%">
+                    <table id="employeesDcTable" dataContainer="employeesDc" height="200px" width="700px">
                         <actions>
-                            <action id="create" type="create"/>
-                            <action id="edit" type="edit"/>
-                            <action id="remove" type="remove"/>
+                            <action id="create" type="create" caption="mainMsg://create"/>
+                            <action id="edit" type="edit" caption="mainMsg://edit"/>
+                            <action id="remove" type="remove" caption="mainMsg://remove"/>
                         </actions>
                         <columns>
-                            <column id="firstName" link="true" linkScreen="tesis_Employee.edit" linkScreenOpenType="DIALOG"/>
+                            <column id="firstName" caption="msg://employeeName" link="true"
+                                    linkScreen="tesis_Employee.edit"
+                                    linkScreenOpenType="DIALOG"/>
+                            <column id="secondName" caption="msg://employeeSurname"/>
                         </columns>
                         <buttonsPanel>
                             <button action="employeesDcTable.create"/>
@@ -72,24 +84,16 @@
                         </buttonsPanel>
                     </table>
                 </groupBox>
-                <form id="form" dataContainer="carServiceCenterDc">
-                    <column width="250px">
-                        <textField id="nameField" property="name"/>
-                        <textField id="phoneField" property="phone"/>
-                        <textField id="addressField" property="address"/>
-                        <optionsList id="cityField" optionsContainer="citiesDc" height="100" width="300"/>
-                    </column>
-                </form>
             </tab>
-            <tab caption="Clients" id="tab_clients" lazy="false" spacing="true" margin="true,false,false,false">
-                <groupBox caption="Customers">
-                    <table id="customersDcTable" dataContainer="customersDc" height="200px" width="300px">
+            <tab caption="msg://tabClient" id="tabClients" lazy="false" margin="true,false,false,false" spacing="true">
+                <groupBox caption="msg://tabClient">
+                    <table id="customersDcTable" dataContainer="customersDc" height="200px" width="700px">
                         <actions>
-                            <action id="add" type="add"/>
-                            <action id="exclude" type="exclude"/>
+                            <action id="add" type="add" caption="msg://add"/>
+                            <action id="exclude" type="exclude" caption="msg://exclude"/>
                         </actions>
                         <columns>
-                            <column id="name"/>
+                            <column id="name" caption="msg://clientName"/>
                         </columns>
                         <buttonsPanel>
                             <button action="customersDcTable.add"/>

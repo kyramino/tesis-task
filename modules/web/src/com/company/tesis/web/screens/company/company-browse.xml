@@ -26,7 +26,6 @@
                 width="800"/>
     <layout expand="companiesTable"
             spacing="true">
-        <label value="Company customers"/>
         <filter id="filter"
                 applyTo="companiesTable"
                 dataLoader="companiesDl">
@@ -36,15 +35,15 @@
                     width="100%"
                     dataContainer="companiesDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="create" type="create" caption="mainMsg://create"/>
+                <action id="edit" type="edit" caption="mainMsg://edit"/>
+                <action id="remove" type="remove" caption="mainMsg://remove"/>
             </actions>
             <columns>
-                <column id="name"/>
-                <column id="phone"/>
-                <column id="email"/>
-                <column id="inn"/>
+                <column id="name" caption="msg://nameCustomer"/>
+                <column id="phone" caption="msg://phoneCustomer"/>
+                <column id="email" caption="msg://emailCustomer"/>
+                <column id="inn" caption="msg://inn"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

@@ -8,8 +8,7 @@
 
 package com.company.tesis.web.screens.carservicecenter;
 
-import com.company.tesis.entity.Employee;
-import com.company.tesis.web.screens.employee.EmployeeEdit;
+import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Table;
@@ -40,14 +39,17 @@ public class CarServiceCenterBrowse extends StandardLookup<CarServiceCenter> {
     @Inject
     private UserSession userSession;
 
+    @Inject
+    private Metadata metadata;
+
     @Subscribe("carServiceCentersTable.create")
     protected void onEmployeesTableCreateActionPerformed(Action.ActionPerformedEvent event) {
-        CarServiceCenter carServiceCenter = new CarServiceCenter();
+        CarServiceCenter carServiceCenter = metadata.create(CarServiceCenter.class);
         carServiceCenter.setCreator(userSession.getCurrentOrSubstitutedUser());
         screenBuilders.editor(carServiceCentersTable)
                       .newEntity().newEntity(carServiceCenter)
-                      .withScreenClass(CarServiceCenterEdit.class)     // specific editor screen
-                      .withLaunchMode(OpenMode.DIALOG)        // open as modal dialog
+                      .withScreenClass(CarServiceCenterEdit.class)
+                      .withLaunchMode(OpenMode.NEW_TAB)
                       .build()
                       .show();
     }

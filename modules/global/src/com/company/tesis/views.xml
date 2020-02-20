@@ -6,10 +6,11 @@
         <property name="customers" view="_local"/>
     </view>
     <view class="com.company.tesis.entity.CarServiceCenter" name="center-item-browse" extends="_local">
-        <property name="city" view="_minimal"/>
-        <property name="employees" view="_minimal"/>
-        <property name="customers" view="_minimal"/>
-        <property name="repairs" view="_minimal"/>
+        <property name="city" view="_local"/>
+        <property name="employees" view="_local"/>
+        <property name="customers" view="_local"/>
+        <property name="repairs" view="_local"/>
+        <property name="creator" view="_local"/>
     </view>
     <view entity="tesis_Employee" name="employee-view" extends="_local">
         <property name="center" view="_minimal"/>

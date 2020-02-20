@@ -26,7 +26,6 @@
                 width="800"/>
     <layout expand="citiesTable"
             spacing="true">
-        <label value="Cities"/>
         <filter id="filter"
                 applyTo="citiesTable"
                 dataLoader="citiesDl">
@@ -36,14 +35,14 @@
                     width="100%"
                     dataContainer="citiesDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="create" type="create" caption="mainMsg://create"/>
+                <action id="edit" type="edit" caption="mainMsg://edit"/>
+                <action id="remove" type="remove" caption="mainMsg://remove"/>
             </actions>
             <columns>
-                <column id="name"/>
-                <column id="code"/>
-                <column id="isDefault"/>
+                <column id="name" caption="msg://cityName"/>
+                <column id="code" caption="msg://cityCode"/>
+                <column id="isDefault" caption="msg://cityIsDefault"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

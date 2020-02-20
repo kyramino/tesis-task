@@ -24,12 +24,12 @@
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="employeeDc">
             <column width="250px">
-                <textField id="firstNameField" property="firstName"/>
-                <textField id="secondNameField" property="secondName"/>
-                <dateField id="birthDateField" property="birthDate"/>
-                <textField id="emailField" property="email"/>
-                <textField id="salaryField" property="salary"/>
-                <textField id="center" editable="false" property="center.name"/>
+                <textField id="firstNameField" property="firstName" caption="msg://employeeName"/>
+                <textField id="secondNameField" property="secondName" caption="msg://employeeSurname"/>
+                <dateField id="birthDateField" property="birthDate" caption="msg://employeeBirthDate"/>
+                <textField id="emailField" property="email" caption="msg://employeeEmail"/>
+                <textField id="salaryField" property="salary" caption="msg://employeeSalary"/>
+                <textField id="center" editable="false" property="center.name" caption="msg://employeeCenter"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

@@ -19,6 +19,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.List;
 
 @PublishEntityChangedEvents
@@ -34,7 +35,8 @@ public class CarServiceCenter extends StandardEntity {
     @Column(name = "NAME", nullable = false)
     protected String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CREATOR_ID")
     protected User creator;
 
@@ -49,7 +51,7 @@ public class CarServiceCenter extends StandardEntity {
     @Composition
     @OnDelete(DeletePolicy.UNLINK)
     @OneToMany(mappedBy = "center")
-    protected List<Repair> repairs;
+    protected List<Repair> repairs = new ArrayList<>();
 
     @Column(name = "ADDRESS")
     protected String address;
@@ -58,12 +60,12 @@ public class CarServiceCenter extends StandardEntity {
                joinColumns = @JoinColumn(name = "CAR_SERVICE_CENTER_ID"),
                inverseJoinColumns = @JoinColumn(name = "CUSTOMER_ID"))
     @ManyToMany
-    protected List<Customer> customers;
+    protected List<Customer> customers = new ArrayList<>();
 
     @Composition
     @OnDelete(DeletePolicy.DENY)
     @OneToMany(mappedBy = "center")
-    protected List<Employee> employees;
+    protected List<Employee> employees = new ArrayList<>();
 
     public User getCreator() {
         return creator;

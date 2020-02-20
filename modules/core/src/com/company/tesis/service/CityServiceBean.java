@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.inject.Inject;
-import java.util.List;
+import java.util.UUID;
 
 @Service(CityService.NAME)
 public class CityServiceBean implements CityService {
@@ -29,7 +29,7 @@ public class CityServiceBean implements CityService {
     @Override
     public City getDefaultCity() {
         EntityManager entityManager = persistence.getEntityManager();
-        return entityManager.createQuery("SELECT e FROM tesis_City e where e.isDefault IS TRUE", City.class)
+        return entityManager.createQuery("SELECT e FROM tesis_City e where e.isDefault = TRUE", City.class)
                             .getFirstResult();
     }
 
@@ -49,11 +49,14 @@ public class CityServiceBean implements CityService {
 
     @Transactional
     @Override
-    public boolean hasCityWithSuchName(String name) {
+    public boolean hasCityWithSuchName(UUID id, String name) {
         EntityManager entityManager = persistence.getEntityManager();
         if (!StringUtils.isEmpty(name)) {
-            Query query = entityManager.createQuery("SELECT e FROM tesis_City e where e.name like ?1", City.class);
-            query.setParameter(1, name);
+            Query query = entityManager.createQuery("SELECT e FROM tesis_City e where e.name like :name AND " +
+                                                            "e.id <> :id",
+                                                    City.class);
+            query.setParameter("name", name);
+            query.setParameter("id", id);
             return !query.getResultList().isEmpty();
         }
         return false;

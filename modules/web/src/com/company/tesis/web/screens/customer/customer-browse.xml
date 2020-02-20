@@ -35,33 +35,12 @@
 <groupTable id="customersTable"
         width="100%"
         dataContainer="customersDc">
-    <actions>
-        <action id="create" type="create"/>
-    
-        <action id="edit" type="edit"/>
-    
-        <action id="remove" type="remove"/>
-    
-    </actions>
     <columns>
-        <column id="name"/>
-    
-        <column id="phone"/>
-    
-        <column id="email"/>
-    
+        <column id="name" caption="msg://nameCustomer"/>
+        <column id="phone" caption="msg://phoneCustomer"/>
+        <column id="email" caption="msg://emailCustomer"/>
     </columns>
     <rowsCount/>
-    <buttonsPanel id="buttonsPanel"
-                  alwaysVisible="true">
-        
-            <button id="createBtn" action="customersTable.create"/>                
-        
-            <button id="editBtn" action="customersTable.edit"/>                
-        
-            <button id="removeBtn" action="customersTable.remove"/>                
-        
-    </buttonsPanel>
 </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>

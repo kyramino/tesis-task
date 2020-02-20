@@ -21,13 +21,12 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="editActions" spacing="true">
-        <label value="Company customer"/>
         <form id="form" dataContainer="companyDc">
             <column width="250px">
-                <textField id="nameField" property="name"/>
-                <textField id="phoneField" property="phone"/>
-                <textField id="emailField" property="email"/>
-                <textField id="innField" property="inn"/>
+                <textField id="nameField" property="name" caption="msg://nameCustomer"/>
+                <textField id="phoneField" property="phone" caption="msg://phoneCustomer"/>
+                <textField id="emailField" property="email" caption="msg://emailCustomer"/>
+                <textField id="innField" property="inn" caption="msg://inn"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

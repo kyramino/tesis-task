@@ -17,6 +17,7 @@ import com.haulmont.cuba.core.global.EmailException;
 import com.haulmont.cuba.core.global.EmailInfo;
 import com.haulmont.cuba.core.global.Scripting;
 import com.haulmont.cuba.core.global.TimeSource;
+import com.haulmont.cuba.security.app.Authenticated;
 import groovy.lang.Binding;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +47,7 @@ public class EmployeeWorker implements EmployeeWorkerMBean {
     @Inject
     private EmailConfig emailConfig;
 
+    @Authenticated
     @Transactional
     public void sendGreetings() {
         Date date = timeSource.currentTimestamp();

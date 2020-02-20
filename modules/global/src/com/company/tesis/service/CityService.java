@@ -10,6 +10,8 @@ package com.company.tesis.service;
 
 import com.company.tesis.entity.City;
 
+import java.util.UUID;
+
 public interface CityService {
 
     String NAME = "tesis_CityService";
@@ -18,5 +20,5 @@ public interface CityService {
 
     void resetDefaultCity(City exclusionCity);
 
-    boolean hasCityWithSuchName(String name);
+    boolean hasCityWithSuchName(UUID id, String name);
 }

@@ -24,9 +24,9 @@
         <label value="City"/>
         <form id="form" dataContainer="cityDc">
             <column width="250px">
-                <textField id="nameField" property="name"/>
-                <textField id="codeField" property="code"/>
-                <checkBox id="defaultField" property="isDefault"/>
+                <textField id="nameField" property="name" caption="msg://cityName"/>
+                <textField id="codeField" property="code" caption="msg://cityCode"/>
+                <checkBox id="defaultField" property="isDefault" caption="msg://cityIsDefault"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

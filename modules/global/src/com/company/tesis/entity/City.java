@@ -7,13 +7,15 @@
  */
 package com.company.tesis.entity;
 
-import com.company.tesis.validator.Unique;
+import com.company.tesis.validator.UniqueCityName;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.config.defaults.Default;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.Listeners;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.core.global.validation.groups.UiCrossFieldChecks;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +26,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
+@UniqueCityName(groups = {Default.class, UiCrossFieldChecks.class})
 @PublishEntityChangedEvents
 @NamePattern("%s|name")
 @Table(name = "TESIS_CITY")
@@ -35,7 +38,6 @@ public class City extends StandardEntity {
 
     @NotBlank
     @NotNull
-    @Unique
     @Column(name = "NAME", nullable = false, unique = true)
     protected String name;
 

@@ -12,6 +12,7 @@ import com.company.tesis.entity.*;
 import com.company.tesis.service.CityService;
 import com.company.tesis.web.screens.employee.EmployeeEdit;
 import com.company.tesis.web.screens.repair.RepairEdit;
+import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.components.*;
@@ -59,6 +60,8 @@ public class CarServiceCenterEdit extends StandardEditor<CarServiceCenter> {
     @Inject
     private MessageBundle messageBundle;
 
+    @Inject
+    private Metadata metadata;
 
     @Subscribe
     private void onInit(InitEvent event) {
@@ -78,34 +81,28 @@ public class CarServiceCenterEdit extends StandardEditor<CarServiceCenter> {
         getScreenData().loadAll();
         refreshTabCaption();
         dataContext.addChangeListener(changeEvent -> refreshTabCaption());
-
-    }
-
-    @Subscribe("cityField")
-    private void onOptionsListChanging(OptionsList.ValueChangeEvent<City> event) {
-        getEditedEntity().setCity(event.getComponent().getValue());
     }
 
     @Subscribe("employeesDcTable.create")
     protected void onEmployeesTableCreateActionPerformed(Action.ActionPerformedEvent event) {
-        Employee employee = new Employee();
+        Employee employee = metadata.create(Employee.class);
         employee.setCenter(getEditedEntity());
         screenBuilders.editor(employeesDcTable)
                       .newEntity().newEntity(employee)
-                      .withScreenClass(EmployeeEdit.class)     // specific editor screen
-                      .withLaunchMode(OpenMode.DIALOG)        // open as modal dialog
+                      .withScreenClass(EmployeeEdit.class)
+                      .withLaunchMode(OpenMode.DIALOG)
                       .build()
                       .show();
     }
 
     @Subscribe("repairsDcTable.create")
     protected void onRepairsTableCreateActionPerformed(Action.ActionPerformedEvent event) {
-        Repair repair = new Repair();
+        Repair repair = metadata.create(Repair.class);
         repair.setCenter(getEditedEntity());
         screenBuilders.editor(repairsDcTable)
                       .newEntity().newEntity(repair)
-                      .withScreenClass(RepairEdit.class)     // specific editor screen
-                      .withLaunchMode(OpenMode.DIALOG)        // open as modal dialog
+                      .withScreenClass(RepairEdit.class)
+                      .withLaunchMode(OpenMode.DIALOG)
                       .build()
                       .show();
     }
@@ -115,11 +112,12 @@ public class CarServiceCenterEdit extends StandardEditor<CarServiceCenter> {
         event.getEntity().setCity(cityService.getDefaultCity());
     }
 
-    private void refreshTabCaption(){
+    private void refreshTabCaption() {
+        String tabName = messageBundle.getMessage("tabClient");
         for(TabSheet.Tab tab : tabSheet.getTabs()) {
-            if ("tab_clients".equals(tab.getName())) {
+            if ("tabClients".equals(tab.getName())) {
                 int size = getEditedEntity().getCustomers() != null ? getEditedEntity().getCustomers().size() : 0;
-                tab.setCaption("Clients (" + size + ")");
+                tab.setCaption(tabName + " (" + size + ")");
             }
         }
     }

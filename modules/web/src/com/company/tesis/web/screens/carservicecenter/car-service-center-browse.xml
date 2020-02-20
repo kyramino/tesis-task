@@ -26,12 +26,12 @@
                 width="800"/>
     <layout expand="carServiceCentersTable"
             spacing="true">
-        <label value="Car service centers"/>
         <filter id="filter"
                 applyTo="carServiceCentersTable"
                 dataLoader="carServiceCentersDl">
             <properties include=".*"/>
-            <custom name="employee" paramClass="java.lang.String" caption="employees" join="join {E}.employees em">
+            <custom name="employee" paramClass="java.lang.String" caption="msg://filterEmployee"
+                    join="join {E}.employees em">
                 em.firstName like ?
             </custom>
         </filter>
@@ -39,17 +39,17 @@
                     width="100%"
                     dataContainer="carServiceCentersDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="create" type="create" caption="mainMsg://create"/>
+                <action id="edit" type="edit" caption="mainMsg://edit"/>
+                <action id="remove" type="remove" caption="mainMsg://remove"/>
             </actions>
             <columns>
                 <group>
-                    <column id="city.name"/>
+                    <column id="city.name" caption="msg://centerCity" link="true" linkScreen="tesis_City.edit"/>
                 </group>
-                <column id="name"/>
-                <column id="phone"/>
-                <column id="address"/>
+                <column id="name" caption="msg://centerName"/>
+                <column id="phone" caption="msg://centerPhone"/>
+                <column id="address" caption="msg://centerAddress"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
